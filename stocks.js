@@ -44,6 +44,11 @@ const calcAverage = (stockObj) => {
 
   let priceArray = stockObj.Elements[0].DataSeries.close.values
 
+  // let { Elements: [{ DataSeries: stuff }] = stockObj
+  let { Elements: [ { DataSeries: { close: { values } } } ] } = stockObj
+  console.log("stuff", values)
+  // console.log("stuff", DataSeries)
+
   // store array length
   let stockLength = priceArray.length
 
