@@ -15,7 +15,7 @@ const { get } = require('http');
 let url = `http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?parameters=%7B%22Normalized%22%3Afalse%2C%22NumberOfDays%22%3A365%2C%22DataPeriod%22%3A%22Day%22%2C%22Elements%22%3A%5B%7B%22Symbol%22%3A%22AAPL%22%2C%22Type%22%3A%22price%22%2C%22Params%22%3A%5B%22c%22%5D%7D%5D%7D`
 let url2 = `http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?parameters={"Normalized":false,"NumberOfDays":365,"DataPeriod":"Day","Elements":[{"Symbol":"AAPL","Type":"price","Params":["c"]}]}`
 
-get(url3, (res) => {
+get(url2, (res) => {
 
   let body = ''
 
@@ -24,11 +24,21 @@ get(url3, (res) => {
   })
 
   res.on('end', () => {
-    // console.log(JSON.parse(body))
+    // store body as json
     body = JSON.parse(body)
-    console.log(body)
 
-    // let average =
+    // console.log(body.Elements[0].DataSeries.close.values)
+
+    let stockLength = body.Elements[0].DataSeries.close.values.length
+
+    let sumStockValues = body.Elements[0].DataSeries.close.values.reduce((acc, val) => {
+      return acc + val
+    })
+
+    average = ( sumStockValues / stockLength ).toFixed(2)
+
+    console.log(average)
+
     // let elements = body.Elements
     // let dates = body.Dates
 
