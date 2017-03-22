@@ -24,16 +24,12 @@ get(url, (res) => {
 
   let body = ''
 
-  res.on('data', (err, buff) => {
-
-    if(err){
-      return console.log("Run the program again with a valid stock ticker")
-    }
+  res.on('data', (buff) => {
 
     body += buff.toString()
   })
 
-  res.on('end', (err) => {
+  res.on('end', () => {
 
     // store body as json
     body = JSON.parse(body)
