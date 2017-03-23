@@ -69,3 +69,45 @@ getJSON(url)
 .then( (data) => {
   console.log(calcAverage(data))
 })
+
+
+
+/*Old Way*/
+
+// require get function from http module
+// const { get } = require('http');
+
+// const stockTicker = process.argv[2];
+
+// // let url = `http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?parameters=%7B%22Normalized%22%3Afalse%2C%22NumberOfDays%22%3A365%2C%22DataPeriod%22%3A%22Day%22%2C%22Elements%22%3A%5B%7B%22Symbol%22%3A%22AAPL%22%2C%22Type%22%3A%22price%22%2C%22Params%22%3A%5B%22c%22%5D%7D%5D%7D`
+// // let url2 = `http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?parameters={"Normalized":false,"NumberOfDays":365,"DataPeriod":"Day","Elements":[{"Symbol":"AAPL","Type":"price","Params":["c"]}]}`
+// let url = `http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?parameters={"Normalized":false,"NumberOfDays":365,"DataPeriod":"Day","Elements":[{"Symbol":"${stockTicker}","Type":"price","Params":["c"]}]}`
+
+// get(url, (res) => {
+
+//   let body = ''
+
+//   res.on('data', (buff) => {
+
+//     body += buff.toString()
+//   })
+
+//   res.on('end', () => {
+
+//     // store body as json
+//     body = JSON.parse(body)
+
+//     // store length of values array to calculate average
+//     let stockLength = body.Elements[0].DataSeries.close.values.length
+
+//     // add up all of the stock values
+//     let sumStockValues = body.Elements[0].DataSeries.close.values.reduce((acc, val) => {
+//       return acc + val
+//     })
+
+//     average = ( sumStockValues / stockLength ).toFixed(2)
+
+//     console.log(average)
+
+//   })
+// })
